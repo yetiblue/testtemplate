@@ -1,0 +1,14 @@
+# Backend
+api/dist
+api/ink.egg-info
+api/MEDIA/
+api/STATIC/
+api/SENT_EMAILS/
+**/__pycache__/*
+*.pyc
+
+# Frontend
+frontend/node_modules
+
+# Development
+*.swp

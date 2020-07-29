@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  api:
+    build: ./api
+    depends_on:
+      - db
+      - frontend
+    env_file: .env
+    links:
+      - db:db
+    ports:
+      - "8000:8000"
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./api:/api
+      - ./frontend:/frontend
+  db:
+    env_file: .env
+    image: postgres
+    restart: always
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+  frontend:
+    build: ./frontend
+    command: /frontend/entrypoint.sh
+    env_file: .env
+    ports:
+      - "3000:3000"
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./api:/api
+      - ./frontend:/frontend
+volumes:
+  dbdata:
